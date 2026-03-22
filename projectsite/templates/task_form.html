@@ -1,0 +1,35 @@
+{% load django_bootstrap5 %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Task | Hangarin</title>
+    {% bootstrap_css %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow-lg border-0">
+                    <div class="card-header bg-warning text-dark fw-bold">
+                        <i class="bi bi-pencil"></i> EDIT TASK DETAILS
+                    </div>
+                    <div class="card-body p-4">
+                        <form method="post" class="form">
+                            {% csrf_token %}
+                            {% bootstrap_form form %}
+                            <div class="d-grid gap-2 mt-4">
+                                <button type="submit" class="btn btn-success">Update Task</button>
+                                <a href="{% url 'task-list' %}" class="btn btn-outline-secondary">Cancel</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% bootstrap_javascript %}
+</body>
+</html>
