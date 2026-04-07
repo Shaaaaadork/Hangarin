@@ -22,6 +22,7 @@ from tasks import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include('pwa.urls')),
     path('', TaskListView.as_view(), name='task-list'),
     path('hangarin/', TaskListView.as_view(), name='task-list'),
     path('hangarin/subtasks/', views.SubTaskListView.as_view(), name='subtask-list'),
