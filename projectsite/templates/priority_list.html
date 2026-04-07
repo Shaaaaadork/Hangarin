@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Priorities | Hangarin{% endblock %}
+
+{% block content %}
+<div class="pt-4">
+    <h2 class="fw-bold mb-4">Priority Admin</h2>
+
+    <div class="bg-white p-3 rounded shadow-sm mb-4">
+        <form method="get" class="d-flex gap-2">
+            <input type="text" name="q" class="form-control" placeholder="Search priority level..." value="{{ request.GET.q }}">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+    </div>
+
+    <div class="table-responsive bg-white rounded shadow-sm">
+        <table class="table table-hover mb-0">
+            <thead class="table-dark">
+                <tr>
+                    <th class="py-3">Priority Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for priority in priorities %}
+                <tr>
+                    <td class="py-3">
+                        <span class="badge 
+                            {% if priority.name|lower == 'critical' %}bg-dark text-white
+                            {% elif priority.name|lower == 'high' %}bg-danger
+                            {% elif priority.name|lower == 'medium' %}bg-warning text-dark
+                            {% elif priority.name|lower == 'low' %}bg-success
+                            {% elif priority.name|lower == 'optional' %}bg-info text-dark
+                            {% else %}bg-secondary{% endif %} px-3 py-2">
+                            {{ priority.name|upper }}
+                        </span>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

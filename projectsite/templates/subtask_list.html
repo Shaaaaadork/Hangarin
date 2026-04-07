@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="pt-4">
+    <h2 class="fw-bold mb-4">SubTask Admin</h2>
+    <div class="table-responsive bg-white rounded shadow-sm">
+        <table class="table table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>SubTask</th>
+                    <th>Status</th>
+                    <th>Parent Task</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for sub in subtasks %}
+                <tr>
+                    <td class="fw-bold">{{ sub.title }}</td>
+                    <td>
+                        <span class="badge {% if sub.status == 'Completed' %}bg-success{% else %}bg-secondary{% endif %}">
+                            {{ sub.status }}
+                        </span>
+                    </td>
+                    <td class="text-primary fw-bold">
+                        {{ sub.parent_task.title }}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3" class="text-center py-4">No subtasks found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

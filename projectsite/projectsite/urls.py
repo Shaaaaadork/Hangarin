@@ -18,11 +18,16 @@ from django.contrib import admin
 from django.urls import path, include
 from tasks.views import TaskListView, TaskDetailView, TaskUpdateView, TaskDeleteView, TaskCreateView
 from django.contrib.auth import views as auth_views
+from tasks import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', TaskListView.as_view(), name='task-list'),
     path('hangarin/', TaskListView.as_view(), name='task-list'),
+    path('hangarin/subtasks/', views.SubTaskListView.as_view(), name='subtask-list'),
+    path('hangarin/categories/', views.CategoryListView.as_view(), name='category-list'),
+    path('hangarin/priorities/', views.PriorityListView.as_view(), name='priority-list'),
+    path('hangarin/notes/', views.NoteListView.as_view(), name='note-list'),
     path('hangarin/task/add/', TaskCreateView.as_view(), name='task-add'),
     path('hangarin/task/<int:pk>/', TaskDetailView.as_view(), name='task-detail'),
     path('hangarin/task/<int:pk>/edit/', TaskUpdateView.as_view(), name='task-edit'),
