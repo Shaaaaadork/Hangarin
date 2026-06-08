@@ -66,18 +66,16 @@ class SubTaskListView(LoginRequiredMixin, ListView):
     model = SubTask
     template_name = 'subtask_list.html'
     context_object_name = 'subtasks'
+    login_url = 'login'
 
     def get_queryset(self):
         queryset = SubTask.objects.select_related('parent_task').all()
-        
         q = self.request.GET.get('q')
         status = self.request.GET.get('status')
-
         if q:
             queryset = queryset.filter(title__icontains=q)
         if status:
             queryset = queryset.filter(status=status)
-            
         return queryset
 
 # Categories and Priorities
@@ -106,6 +104,7 @@ class NoteListView(LoginRequiredMixin, ListView):
     model = Note
     template_name = 'note_list.html'
     context_object_name = 'notes'
+    login_url = 'login'
 
     def get_queryset(self):
         queryset = Note.objects.all()
